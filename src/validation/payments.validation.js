@@ -6,5 +6,5 @@ export const paymentValidation = z.object({
   method: z.enum(["card", "click", "payme"], {
     required_error: "method shart",
   }),
-  payment_date: z.string().datetime().optional().or(z.date()).optional()
+  payment_date: z.string().datetime().optional().or(z.date()).optional(),
 });

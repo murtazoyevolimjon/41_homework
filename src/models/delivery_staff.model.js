@@ -17,4 +17,3 @@ const delivery_staffSchema = new mongoose.Schema(
 const delivery_staffModel = model("delivery_staff", delivery_staffSchema);
 
 export default delivery_staffModel;
-

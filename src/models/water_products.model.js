@@ -11,4 +11,4 @@ const water_productsSchema = new Schema(
 
 const water_productsModel = model("products", water_productsSchema);
 
-export default water_productsModel
+export default water_productsModel;

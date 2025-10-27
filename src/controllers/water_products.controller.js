@@ -30,10 +30,13 @@ export const getOnewater = async (req, res, next) => {
   try {
     const getOnewater = await water_productsModel.findById(req.params.id);
     if (!getOnewater) {
-      return res.status(404).json({ message: `not found ID ${req.params.id} from water`});
+      return res
+        .status(404)
+        .json({ message: `not found ID ${req.params.id} from water` });
     }
     res.status(200).json({
-      message: `found ID ${req.params.id} from water`, data: getOnewater,
+      message: `found ID ${req.params.id} from water`,
+      data: getOnewater,
     });
   } catch (error) {
     console.log(error);
