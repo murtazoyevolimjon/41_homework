@@ -1,20 +1,19 @@
 import { Router } from "express";
 import {
-  getDelivery_staffs,
-  getOneDelivery_staff,
-  addDelivery_staff,
-  updateDelivery_staff,
-  deleteDelivery_staff,
-} from "../controller/delivery_staff.controller.js";
-import { protect, adminOnly, deliveryStaffOnly } from "../helper/jwt.js";
+  getDistricts,
+  getOneDistrict,
+  addDistrict,
+  updateDistrict,
+  deleteDistrict,
+} from "../controller/districts.controller.js";
+import { protect, adminOnly } from "../helper/jwt.js";
 
 const router = Router();
 
-router.get("/", protect, adminOnly, getDelivery_staffs);
-router.post("/", protect, addDelivery_staff);
-router.put("/:id", protect, adminOnly, updateDelivery_staff);
-router.delete("/:id", protect, adminOnly, deleteDelivery_staff);
+router.get("/", protect, adminOnly, getDistricts);
+router.post("/", protect, adminOnly, addDistrict);
+router.put("/:id", protect, adminOnly, updateDistrict);
+router.delete("/:id", protect, adminOnly, deleteDistrict);
+router.get("/:id", protect, adminOnly, getOneDistrict);
 
-router.get("/profile/:id", protect, deliveryStaffOnly, getOneDelivery_staff);
-
-export { router as delivery_staffRouter };
+export { router as districtRouter };

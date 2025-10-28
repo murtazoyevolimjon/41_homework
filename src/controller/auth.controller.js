@@ -1,4 +1,4 @@
-import Customer from "../model/customersModel.js";
+import Customer from "../model/customerModel.js";
 import {
   verifyToken,
   generateAccessToken,
