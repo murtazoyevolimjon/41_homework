@@ -1,20 +1,15 @@
-import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import cors from "cors";
-import router from "./src/routers/index.js";
-
-dotenv.config();
-
+import express from 'express';
+import { connectDB } from './src/db/db.js';
+import { mainRouter } from './src/routes/index.js';
+import { errorHandler } from './src/middleware/errorHandler.js';
 const app = express();
-const PORT = process.env.PORT || 4000;
-const mongodb = process.env.MONGO_URL;
-
 app.use(express.json());
-app.use(cors());
+connectDB();
+app.use('/', mainRouter);
 
-app.use("/", router);
+app.use(errorHandler);
 
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
