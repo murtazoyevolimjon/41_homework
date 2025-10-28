@@ -1,11 +1,15 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-export default {
-  jwt: {
-    accessSecret: process.env.ACCESS_SECRET,
-    refreshSecret: process.env.REFRESH_SECRET,
+export const config = {
+  app: {
+    port: process.env.PORT,
   },
-  mongoURI: process.env.MONGO_URI,
-  port: process.env.PORT || 4000,
+  db: {
+    url: process.env.MONGO_URL,
+  },
+  jwt: {
+    accessSecret: process.env.JWT_ACCESS_SECRET,
+    refreshSecret: process.env.JWT_REFRESH_SECRET,
+  },
 };
