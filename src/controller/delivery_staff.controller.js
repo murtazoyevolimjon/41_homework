@@ -1,5 +1,5 @@
 import Delivery_staff from "../model/delivery_staffModel.js";
-export const getDelivery_staffs = async (req, res, next) => {
+export const create = async (req, res, next) => {
   try {
     const delivery_staff = await Delivery_staff.find();
     res.send(delivery_staff);
@@ -8,7 +8,7 @@ export const getDelivery_staffs = async (req, res, next) => {
     next(err);
   }
 };
-export const getOneDelivery_staff = async (req, res, next) => {
+export const getOne = async (req, res, next) => {
   try {
     const { id } = req.params;
     const delivery_staff = await Delivery_staff.find({ id });
@@ -19,7 +19,7 @@ export const getOneDelivery_staff = async (req, res, next) => {
   }
 };
 
-export const addDelivery_staff = async (req, res, next) => {
+export const getAll = async (req, res, next) => {
   try {
     const delivery_staff = await Delivery_staff.create(req.body);
     res.send({ message: delivery_staff });
@@ -28,16 +28,15 @@ export const addDelivery_staff = async (req, res, next) => {
     next(err);
   }
 };
-export const updateDelivery_staff = async (req, res, next) => {
+export const update = async (req, res, next) => {
   try {
     const { id } = req.params;
     const updatedData = req.body;
 
-    const updatedStaff = await Delivery_staff.findByIdAndUpdate(
-      id,
-      updatedData,
-      { new: true, runValidators: true },
-    );
+    const updatedStaff = await Delivery_staff.findByIdAndUpdate(id, updatedData, {
+      new: true,
+      runValidators: true,
+    });
 
     if (!updatedStaff) {
       return res.status(404).send("Delivery staff is not found!");
@@ -53,7 +52,7 @@ export const updateDelivery_staff = async (req, res, next) => {
   }
 };
 
-export const deleteDelivery_staff = async (req, res, next) => {
+export const deleted = async (req, res, next) => {
   try {
     const { id } = req.params;
     const delivery_staff = await Delivery_staff.deleteOne(id);

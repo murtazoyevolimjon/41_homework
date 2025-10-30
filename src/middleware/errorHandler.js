@@ -1,11 +1,18 @@
-// eslint-disable-next-line no-unused-vars
-export const errorHandler = (err, req, res, next) => {
-  console.error("Error:", err.stack || err.message);
-  const statusCode = err.statusCode || 500;
+import { ApiError } from "./apiError.js";
 
-  res.status(statusCode).json({
+// Global error handler middleware
+export const errorHandler = (err, req, res) => {
+  console.error("Error:", err.message || err);
+
+  if (err instanceof ApiError) {
+    return res.status(err.statusCode).json({
+      success: false,
+      message: err.message,
+    });
+  }
+
+  return res.status(500).json({
     success: false,
-    message: err.message || "Serverda kutilmagan xato yuz berdi",
-    stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
+    message: "Serverda ichki xatolik yuz berdi!",
   });
 };

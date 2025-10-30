@@ -1,5 +1,5 @@
 import Order from "../model/ordersModel.js";
-export const getOrders = async (req, res, next) => {
+export const create = async (req, res, next) => {
   try {
     const order = await Order.find();
     res.send({ message: order });
@@ -8,7 +8,7 @@ export const getOrders = async (req, res, next) => {
     next(err);
   }
 };
-export const getOneOrder = async (req, res, next) => {
+export const getOne = async (req, res, next) => {
   try {
     const { id } = req.params;
     const order = await Order.find({ id });
@@ -19,7 +19,7 @@ export const getOneOrder = async (req, res, next) => {
   }
 };
 
-export const addOrder = async (req, res, next) => {
+export const getAll = async (req, res, next) => {
   try {
     const order = await Order.create(req.body);
     res.send({ message: order });
@@ -28,7 +28,7 @@ export const addOrder = async (req, res, next) => {
     next(err);
   }
 };
-export const updateOrder = async (req, res, next) => {
+export const update = async (req, res, next) => {
   try {
     const { id } = req.params;
     const updatedData = req.body;
@@ -52,7 +52,7 @@ export const updateOrder = async (req, res, next) => {
   }
 };
 
-export const deleteOrder = async (req, res, next) => {
+export const deleted = async (req, res, next) => {
   try {
     const { id } = req.params;
     const order = await Order.deleteOne(id);

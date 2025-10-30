@@ -12,7 +12,7 @@ const router = Router();
 
 router.get("/", protect, adminOnly, getCustomers);
 router.get("/:id", protect, getOneCustomer);
-router.post("/", protect, adminOnly, addCustomer);
+router.post("/", addCustomer);
 router.put("/:id", protect, adminOnly, updateCustomer);
 router.delete("/:id", protect, adminOnly, deleteCustomer);
 

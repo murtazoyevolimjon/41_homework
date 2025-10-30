@@ -1,6 +1,6 @@
 import Customer from "../model/customerModel.js";
 
-export const getCustomers = async (req, res, next) => {
+export const create = async (req, res, next) => {
   try {
     const customers = await Customer.find();
     res.status(200).json({ success: true, data: customers });
@@ -9,7 +9,7 @@ export const getCustomers = async (req, res, next) => {
   }
 };
 
-export const getOneCustomer = async (req, res, next) => {
+export const getOne = async (req, res, next) => {
   try {
     const { id } = req.params;
     const customer = await Customer.findById(id);
@@ -24,20 +24,25 @@ export const getOneCustomer = async (req, res, next) => {
   }
 };
 
-export const addCustomer = async (req, res, next) => {
+export const getAll = async (req, res, next) => {
   try {
     const customer = await Customer.create(req.body);
     res.status(201).json({
       success: true,
       message: "Customer created successfully!",
-      data: customer,
+      data: {
+        id: customer._id,
+        name: customer.name,
+        email: customer.email,
+        role: customer.role,
+      },
     });
   } catch (err) {
     next(err);
   }
 };
 
-export const updateCustomer = async (req, res, next) => {
+export const update = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -60,7 +65,7 @@ export const updateCustomer = async (req, res, next) => {
   }
 };
 
-export const deleteCustomer = async (req, res, next) => {
+export const deleted = async (req, res, next) => {
   try {
     const { id } = req.params;
 

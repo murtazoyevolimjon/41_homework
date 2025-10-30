@@ -1,5 +1,5 @@
 import Water_product from "../model/water_productsModel.js";
-export const getWater_products = async (req, res, next) => {
+export const create = async (req, res, next) => {
   try {
     const water_product = await Water_product.find();
     res.send({ message: water_product });
@@ -8,7 +8,7 @@ export const getWater_products = async (req, res, next) => {
     next(err);
   }
 };
-export const getOneWater_product = async (req, res, next) => {
+export const getOne = async (req, res, next) => {
   try {
     const { id } = req.params;
     const water_product = await Water_product.find({ id });
@@ -19,7 +19,7 @@ export const getOneWater_product = async (req, res, next) => {
   }
 };
 
-export const addWater_product = async (req, res, next) => {
+export const getAll = async (req, res, next) => {
   try {
     const water_product = await Water_product.create(req.body);
     res.send({ message: water_product });
@@ -28,16 +28,15 @@ export const addWater_product = async (req, res, next) => {
     next(err);
   }
 };
-export const updateWater_product = async (req, res, next) => {
+export const update = async (req, res, next) => {
   try {
     const { id } = req.params;
     const updatedData = req.body;
 
-    const updatedWaterProduct = await Water_product.findByIdAndUpdate(
-      id,
-      updatedData,
-      { new: true, runValidators: true },
-    );
+    const updatedWaterProduct = await Water_product.findByIdAndUpdate(id, updatedData, {
+      new: true,
+      runValidators: true,
+    });
 
     if (!updatedWaterProduct) {
       return res.status(404).json({ message: "Water product not found!" });
@@ -54,7 +53,7 @@ export const updateWater_product = async (req, res, next) => {
   }
 };
 
-export const deleteWater_product = async (req, res, next) => {
+export const deleted = async (req, res, next) => {
   try {
     const { id } = req.params;
     const water_product = await Water_product.deleteOne(id);

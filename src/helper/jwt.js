@@ -1,16 +1,15 @@
-/* eslint-disable no-unused-vars */
 import jwt from "jsonwebtoken";
 import { ApiError } from "../middleware/apiError.js";
 
 // CREATE ACCESS TOKEN
-export const generateAccessToken = (user) => {
+export const generateAccessToken = user => {
   return jwt.sign({ id: user._id }, process.env.JWT_ACCESS_SECRET, {
     expiresIn: process.env.JWT_ACCESS_EXPIRES,
   });
 };
 
 // CREATE REFRESH TOKEN
-export const generateRefreshToken = (user) => {
+export const generateRefreshToken = user => {
   return jwt.sign({ id: user._id }, process.env.JWT_REFRESH_SECRET, {
     expiresIn: process.env.JWT_REFRESH_EXPIRES,
   });
@@ -21,6 +20,7 @@ export const verifyToken = (token, secret) => {
   try {
     return jwt.verify(token, secret);
   } catch (err) {
+    console.error("JWT verify error:", err.message);
     throw new ApiError(401, "Token yaroqsiz yoki muddati tugagan");
   }
 };
@@ -40,6 +40,7 @@ export const protect = (req, res, next) => {
     req.user = decoded.id;
     next();
   } catch (error) {
+    console.error("Protect error:", error.message);
     return next(error);
   }
 };

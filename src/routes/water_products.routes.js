@@ -10,7 +10,7 @@ import { adminOnly, protect } from "../helper/jwt.js";
 const router = Router();
 
 router.use(protect);
-router.get("/", protect, adminOnly, getWater_products);
+router.get("/", adminOnly, getWater_products);
 router.get("/:id", protect, getOneWater_product);
 router.post("/", protect, adminOnly, addWater_product);
 router.put("/:id", protect, adminOnly, updateWater_product);

@@ -1,5 +1,5 @@
 import District from "../model/districtsModel.js";
-export const getDistricts = async (req, res, next) => {
+export const create = async (req, res, next) => {
   try {
     const district = await District.find();
     res.send({ message: district });
@@ -8,7 +8,7 @@ export const getDistricts = async (req, res, next) => {
     next(err);
   }
 };
-export const getOneDistrict = async (req, res, next) => {
+export const getOne = async (req, res, next) => {
   try {
     const { id } = req.params;
     const district = await District.find({ id });
@@ -19,7 +19,7 @@ export const getOneDistrict = async (req, res, next) => {
   }
 };
 
-export const addDistrict = async (req, res, next) => {
+export const getAll = async (req, res, next) => {
   try {
     const district = await District.create(req.body);
     res.send({ message: district });
@@ -28,7 +28,7 @@ export const addDistrict = async (req, res, next) => {
     next(err);
   }
 };
-export const updateDistrict = async (req, res, next) => {
+export const update = async (req, res, next) => {
   try {
     const { id } = req.params;
     const updatedData = req.body;
@@ -50,7 +50,7 @@ export const updateDistrict = async (req, res, next) => {
     next(err);
   }
 };
-export const deleteDistrict = async (req, res, next) => {
+export const deleted = async (req, res, next) => {
   try {
     const { id } = req.params;
     const district = await District.deleteOne(id);

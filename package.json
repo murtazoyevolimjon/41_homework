@@ -1,22 +1,32 @@
 {
   "name": "41_homework",
   "version": "1.0.0",
-  "description": "",
+  "description": "Water Delivery backend project by Olimjon Murtazoyev",
   "main": "app.js",
+  "type": "module",
   "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "echo \"Error: no test specified\" && exit 0",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky"
+    "prepare": "husky install",
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/murtazoyevolimjon/41_homework.git"
+    "url": "https://github.com/murtazoyevolimjon/41_homework.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "express",
+    "mongodb",
+    "mongoose",
+    "nodemailer",
+    "jwt",
+    "backend"
+  ],
+  "author": "Murtazoyev Olimjon",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/murtazoyevolimjon/41_homework/issues"
@@ -25,7 +35,9 @@
   "dependencies": {
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.7.0",
+    "nodemailer": "^7.0.10"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.1.0",
@@ -36,5 +48,8 @@
     "globals": "^16.4.0",
     "husky": "^9.1.7",
     "prettier": "3.6.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

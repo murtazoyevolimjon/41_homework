@@ -1,5 +1,5 @@
 import Payment from "../model/paymentsModel.js";
-export const getPayments = async (req, res, next) => {
+export const create = async (req, res, next) => {
   try {
     const payment = await Payment.find();
     res.send({ message: payment });
@@ -8,7 +8,7 @@ export const getPayments = async (req, res, next) => {
     next(err);
   }
 };
-export const getOnePayment = async (req, res, next) => {
+export const getOne = async (req, res, next) => {
   try {
     const { id } = req.params;
     const payment = await Payment.find({ id });
@@ -19,7 +19,7 @@ export const getOnePayment = async (req, res, next) => {
   }
 };
 
-export const addPayment = async (req, res, next) => {
+export const getAll = async (req, res, next) => {
   try {
     const payment = await Payment.create(req.body);
     res.send({ message: payment });
@@ -28,7 +28,7 @@ export const addPayment = async (req, res, next) => {
     next(err);
   }
 };
-export const updatePayment = async (req, res, next) => {
+export const update = async (req, res, next) => {
   try {
     const { id } = req.params;
     const updatedData = req.body;
@@ -53,7 +53,7 @@ export const updatePayment = async (req, res, next) => {
   }
 };
 
-export const deletePayment = async (req, res, next) => {
+export const deleted = async (req, res, next) => {
   try {
     const { id } = req.params;
     const payment = await Payment.deleteOne(id);

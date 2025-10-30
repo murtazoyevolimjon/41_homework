@@ -20,10 +20,9 @@ export default {
       ],
     ],
   },
-  ignores: [(commit) => commit === ""],
+  ignores: [commit => commit === ""],
   defaultIgnores: true,
-  helpUrl:
-    "https://github.com/conventional-changelog/commitlint/#what-is-commitlint",
+  helpUrl: "https://github.com/conventional-changelog/commitlint/#what-is-commitlint",
   prompt: {
     messages: {
       skip: ":skip",

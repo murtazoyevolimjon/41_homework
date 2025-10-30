@@ -1,9 +1,5 @@
 import Customer from "../model/customerModel.js";
-import {
-  verifyToken,
-  generateAccessToken,
-  generateRefreshToken,
-} from "../helper/jwt.js";
+import { verifyToken, generateAccessToken, generateRefreshToken } from "../helper/jwt.js";
 import { ApiError } from "../middleware/apiError.js";
 
 export const authController = {
@@ -44,8 +40,7 @@ export const authController = {
       if (!customerData) return next(new ApiError(404, "User topilmadi"));
 
       const isValidPassword = await customerData.comparePassword(password);
-      if (!isValidPassword)
-        return next(new ApiError(401, "Email yoki parol noto'g'ri"));
+      if (!isValidPassword) return next(new ApiError(401, "Email yoki parol noto'g'ri"));
 
       const accessToken = generateAccessToken(customerData);
       const refreshToken = generateRefreshToken(customerData);

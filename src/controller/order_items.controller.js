@@ -1,5 +1,5 @@
 import Order_item from "../model/order_itemsModel.js";
-export const getOrder_items = async (req, res, next) => {
+export const create = async (req, res, next) => {
   try {
     const order_item = await Order_item.find();
     res.send({ message: order_item });
@@ -8,7 +8,7 @@ export const getOrder_items = async (req, res, next) => {
     next(err);
   }
 };
-export const getOneOrder_item = async (req, res, next) => {
+export const getOne = async (req, res, next) => {
   try {
     const { id } = req.params;
     const order_item = await Order_item.find({ id });
@@ -19,7 +19,7 @@ export const getOneOrder_item = async (req, res, next) => {
   }
 };
 
-export const addOrder_item = async (req, res, next) => {
+export const getAll = async (req, res, next) => {
   try {
     const order_item = await Order_item.create(req.body);
     res.send({ message: order_item });
@@ -28,16 +28,15 @@ export const addOrder_item = async (req, res, next) => {
     next(err);
   }
 };
-export const updateOrder_item = async (req, res, next) => {
+export const update = async (req, res, next) => {
   try {
     const { id } = req.params;
     const updatedData = req.body;
 
-    const updatedOrderItem = await Order_item.findByIdAndUpdate(
-      id,
-      updatedData,
-      { new: true, runValidators: true },
-    );
+    const updatedOrderItem = await Order_item.findByIdAndUpdate(id, updatedData, {
+      new: true,
+      runValidators: true,
+    });
 
     if (!updatedOrderItem) {
       return res.status(404).send("Order_item not found!");
@@ -53,7 +52,7 @@ export const updateOrder_item = async (req, res, next) => {
   }
 };
 
-export const deleteOrder_item = async (req, res, next) => {
+export const deleted = async (req, res, next) => {
   try {
     const { id } = req.params;
     const order_item = await Order_item.deleteOne(id);

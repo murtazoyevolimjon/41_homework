@@ -11,7 +11,7 @@ import { protect, adminOnly } from "../helper/jwt.js";
 const router = Router();
 
 router.get("/", protect, adminOnly, getDistricts);
-router.post("/", protect, adminOnly, addDistrict);
+router.post("/", addDistrict);
 router.put("/:id", protect, adminOnly, updateDistrict);
 router.delete("/:id", protect, adminOnly, deleteDistrict);
 router.get("/:id", protect, adminOnly, getOneDistrict);
