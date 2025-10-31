@@ -1,20 +1,19 @@
 import { Router } from "express";
 import {
-  getDelivery_staffs,
-  getOneDelivery_staff,
-  addDelivery_staff,
-  updateDelivery_staff,
-  deleteDelivery_staff,
+  create,
+  getAll,
+  getOne,
+  update,
+  deleted,
 } from "../controller/delivery_staff.controller.js";
-import { protect, adminOnly, deliveryStaffOnly } from "../helper/jwt.js";
+import { deliveryStaffOnly } from "../middleware/deliveryStaffOnly.js";
 
 const router = Router();
 
-router.get("/", protect, adminOnly, getDelivery_staffs);
-router.post("/", protect, addDelivery_staff);
-router.put("/:id", protect, adminOnly, updateDelivery_staff);
-router.delete("/:id", protect, adminOnly, deleteDelivery_staff);
-
-router.get("/profile/:id", protect, deliveryStaffOnly, getOneDelivery_staff);
+router.post("/", deliveryStaffOnly, create);
+router.get("/", deliveryStaffOnly, getAll);
+router.get("/profile/:id", deliveryStaffOnly, getOne);
+router.put("/:id", deliveryStaffOnly, update);
+router.delete("/:id", deliveryStaffOnly, deleted);
 
 export { router as delivery_staffRouter };

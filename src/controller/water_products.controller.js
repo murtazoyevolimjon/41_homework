@@ -1,18 +1,12 @@
-import Water_product from "../model/water_productsModel.js";
+import Delivery_staff from "../model/delivery_staffModel.js";
+
 export const create = async (req, res, next) => {
   try {
-    const water_product = await Water_product.find();
-    res.send({ message: water_product });
-  } catch (err) {
-    console.log(err);
-    next(err);
-  }
-};
-export const getOne = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const water_product = await Water_product.find({ id });
-    res.send({ message: water_product });
+    const delivery_staff = await Delivery_staff.create(req.body);
+    res.status(201).json({
+      message: "Delivery staff successfully created!",
+      data: delivery_staff,
+    });
   } catch (err) {
     console.log(err);
     next(err);
@@ -21,31 +15,47 @@ export const getOne = async (req, res, next) => {
 
 export const getAll = async (req, res, next) => {
   try {
-    const water_product = await Water_product.create(req.body);
-    res.send({ message: water_product });
+    const delivery_staff = await Delivery_staff.find();
+    res.status(200).json(delivery_staff);
   } catch (err) {
     console.log(err);
     next(err);
   }
 };
+
+export const getOne = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const delivery_staff = await Delivery_staff.findById(id);
+
+    if (!delivery_staff) {
+      return res.status(404).json({ message: "Delivery staff not found!" });
+    }
+
+    res.status(200).json(delivery_staff);
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+};
+
 export const update = async (req, res, next) => {
   try {
     const { id } = req.params;
     const updatedData = req.body;
 
-    const updatedWaterProduct = await Water_product.findByIdAndUpdate(id, updatedData, {
+    const updatedStaff = await Delivery_staff.findByIdAndUpdate(id, updatedData, {
       new: true,
       runValidators: true,
     });
 
-    if (!updatedWaterProduct) {
-      return res.status(404).json({ message: "Water product not found!" });
+    if (!updatedStaff) {
+      return res.status(404).json({ message: "Delivery staff not found!" });
     }
 
     res.status(200).json({
-      success: true,
-      message: "Water product updated successfully!",
-      data: updatedWaterProduct,
+      message: "Delivery staff updated successfully!",
+      data: updatedStaff,
     });
   } catch (err) {
     console.log(err);
@@ -56,11 +66,13 @@ export const update = async (req, res, next) => {
 export const deleted = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const water_product = await Water_product.deleteOne(id);
-    if (water_product.deletedCount === 0) {
-      return res.status(404).json({ message: "Water_product is not found" });
+    const deletedStaff = await Delivery_staff.findByIdAndDelete(id);
+
+    if (!deletedStaff) {
+      return res.status(404).json({ message: "Delivery staff not found!" });
     }
-    res.send({ message: water_product });
+
+    res.status(200).json({ message: "Delivery staff deleted successfully!" });
   } catch (err) {
     console.log(err);
     next(err);

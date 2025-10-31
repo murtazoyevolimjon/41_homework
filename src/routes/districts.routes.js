@@ -1,19 +1,12 @@
 import { Router } from "express";
-import {
-  getDistricts,
-  getOneDistrict,
-  addDistrict,
-  updateDistrict,
-  deleteDistrict,
-} from "../controller/districts.controller.js";
-import { protect, adminOnly } from "../helper/jwt.js";
+import { create, getOne, getAll, update, deleted } from "../controller/districts.controller.js";
 
 const router = Router();
 
-router.get("/", protect, adminOnly, getDistricts);
-router.post("/", addDistrict);
-router.put("/:id", protect, adminOnly, updateDistrict);
-router.delete("/:id", protect, adminOnly, deleteDistrict);
-router.get("/:id", protect, adminOnly, getOneDistrict);
+router.post("/", create);
+router.get("/", getAll);
+router.get("/:id", getOne);
+router.put("/:id", update);
+router.delete("/:id", deleted);
 
 export { router as districtRouter };

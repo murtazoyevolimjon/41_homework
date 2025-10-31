@@ -1,6 +1,5 @@
 import { ApiError } from "./apiError.js";
 
-// Global error handler middleware
 export const errorHandler = (err, req, res) => {
   console.error("Error:", err.message || err);
 

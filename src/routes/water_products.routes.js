@@ -1,19 +1,20 @@
 import { Router } from "express";
 import {
-  getWater_products,
-  getOneWater_product,
-  updateWater_product,
-  deleteWater_product,
-  addWater_product,
+  create,
+  getAll,
+  getOne,
+  update,
+  deleted,
 } from "../controller/water_products.controller.js";
-import { adminOnly, protect } from "../helper/jwt.js";
+import { protect } from "../helper/jwt.js";
+import { deliveryStaffOnly } from "../middleware/deliveryStaffOnly.js";
+
 const router = Router();
 
-router.use(protect);
-router.get("/", adminOnly, getWater_products);
-router.get("/:id", protect, getOneWater_product);
-router.post("/", protect, adminOnly, addWater_product);
-router.put("/:id", protect, adminOnly, updateWater_product);
-router.delete("/:id", protect, adminOnly, deleteWater_product);
+router.post("/", protect, deliveryStaffOnly, create);
+router.get("/", getAll);
+router.get("/:id", getOne);
+router.put("/:id", protect, deliveryStaffOnly, update);
+router.delete("/:id", protect, deliveryStaffOnly, deleted);
 
 export { router as water_productRouter };

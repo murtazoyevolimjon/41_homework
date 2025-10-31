@@ -1,18 +1,12 @@
 import { Router } from "express";
-import { adminOnly, protect } from "../helper/jwt.js";
-import {
-  getAddress,
-  getOneAddress,
-  updateAddress,
-  deleteAddress,
-  addAddress,
-} from "../controller/address.controller.js";
+import {} from "../helper/jwt.js";
+import { create, getAll, getOne, update, deleted } from "../controller/address.controller.js";
 const router = Router();
 
-router.get("/", protect, adminOnly, getAddress);
-router.get("/:id", protect, getOneAddress);
-router.post("/", protect, adminOnly, addAddress);
-router.put("/:id", protect, adminOnly, updateAddress);
-router.delete("/:id", protect, adminOnly, deleteAddress);
+router.post("/", create);
+router.get("/:id", getOne);
+router.get("/", getAll);
+router.put("/:id", update);
+router.delete("/:id", deleted);
 
 export { router as addressRouter };
