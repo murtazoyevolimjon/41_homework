@@ -5,8 +5,8 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
+    "dev": "nodemon --watch . server.js",
+    "start:dev": "node --watch server.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -33,11 +33,13 @@
   },
   "homepage": "https://github.com/murtazoyevolimjon/41_homework#readme",
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.7.0",
-    "nodemailer": "^7.0.10"
+    "mongoose": "^8.19.3",
+    "nodemailer": "^7.0.10",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.1.0",

@@ -1,17 +1,9 @@
-import { ApiError } from "./apiError.js";
+export const errorHandler = (err, req, res, next) => {
+  console.error("Server Error:")
+  console.error(err.stack)
 
-export const errorHandler = (err, req, res) => {
-  console.error("Error:", err.message || err);
-
-  if (err instanceof ApiError) {
-    return res.status(err.statusCode).json({
-      success: false,
-      message: err.message,
-    });
-  }
-
-  return res.status(500).json({
+  res.status(err.status || 500).json({
     success: false,
-    message: "Serverda ichki xatolik yuz berdi!",
+    message: err.message || "error in the server",
   });
 };
